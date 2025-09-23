@@ -42,3 +42,6 @@ def estudiante_list(request):
         "lista_estudiantes": lista_estudiantes
     }
     return render(request, "core/estudiantes_list.html", contexto)
+
+def estudiante_edit(request):
+    pass
