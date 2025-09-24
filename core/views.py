@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 # from .models import Estudiante # Relativa
 from core.models import Estudiante # Absoluta
 from core.forms import EstudianteForm, EstudianteFormManual
@@ -43,5 +43,31 @@ def estudiante_list(request):
     }
     return render(request, "core/estudiantes_list.html", contexto)
 
-def estudiante_edit(request):
-    pass
+
+def editar_estudiante(request, pk):
+    estudiante = get_object_or_404(Estudiante, pk=pk)
+    if request.method == "POST":
+        form = EstudianteForm(request.POST, instance=estudiante)
+        if form.is_valid():
+            form.save()
+            return redirect("listar-estudiantes")
+    else:
+        form = EstudianteForm(instance=estudiante)
+
+    return render(request, "core/estudiante_form.html", {"form": form})
+
+
+def eliminar_estudiante(request, pk):
+    estudiante = get_object_or_404(Estudiante, pk=pk)
+    if request.method == "POST":
+        estudiante.delete()
+        return redirect("listar-estudiantes")
+    return redirect("listar-estudiantes")
+
+
+def estudiante_detail(request, pk):
+    estudiante = get_object_or_404(Estudiante, pk=pk)
+    contexto = {
+        "estudiante": estudiante
+    }
+    return render(request, "core/estudiante_detail.html", {"estudiante": estudiante})

@@ -1,0 +1,21 @@
+{% extends "core/index.html" %}
+
+{% block title %}Eliminar Curso{% endblock %}
+
+{% block content %}
+<div class="container mt-5 text-center">
+  <div class="card shadow-lg rounded-4 border-0">
+    <div class="card-header bg-danger text-white rounded-top-4">
+      <h2>¿Eliminar curso?</h2>
+    </div>
+    <div class="card-body">
+      <p>¿Seguro que querés eliminar el curso <strong>{{ object.nombre }}</strong> (Nro {{ object.numero_curso }})?</p>
+      <form method="post">
+        {% csrf_token %}
+        <button type="submit" class="btn btn-danger">Sí, eliminar</button>
+        <a href="{% url 'curso:listar-cursos' %}" class="btn btn-secondary">Cancelar</a>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

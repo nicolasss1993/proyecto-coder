@@ -33,8 +33,8 @@ if env_path.exists():
                 key, value = line.strip().split("=", 1)
                 os.environ.setdefault(key, value)
 
-SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY")
-
+#SECRET_KEY = os.environ.get("DJANGO_SECRET_KEY")
+SECRET_KEY = "django-insecure-f--(l*u3k3j=7&^5%-y#-_6z^#%#7_1)la&nl!#6z!5agtgsz5"
 # "django-insecure-f--(l*u3k3j=7&^5%-y#-_6z^#%#7_1)la&nl!#6z!5agtgsz5"
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "core",
+    "curso"
 ]
 
 MIDDLEWARE = [

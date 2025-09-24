@@ -1,0 +1,23 @@
+{% extends "core/index.html" %}
+
+{% block title %}Detalle Curso{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+  <div class="card shadow-lg rounded-4 border-0">
+    <div class="card-header bg-primary text-white text-center rounded-top-4">
+      <h2>{{ curso.nombre }}</h2>
+    </div>
+    <div class="card-body">
+      <p><strong>Número de curso:</strong> {{ curso.numero_curso }}</p>
+      <p><strong>Código interno:</strong> {{ curso.code }}</p>
+      <p><strong>Fecha de alta:</strong> {{ curso.fecha_creacion|date:"d/m/Y" }}</p>
+    </div>
+    <div class="card-footer text-center">
+      <a href="{% url 'curso:editar-curso' curso.code %}" class="btn btn-warning me-2">Editar</a>
+      <a href="{% url 'curso:eliminar-curso' curso.code %}" class="btn btn-danger me-2">Eliminar</a>
+      <a href="{% url 'curso:listar-cursos' %}" class="btn btn-secondary">Volver</a>
+    </div>
+  </div>
+</div>
+{% endblock %}

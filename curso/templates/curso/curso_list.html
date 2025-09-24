@@ -1,0 +1,28 @@
+{% extends "core/index.html" %}
+
+{% block title %}{{titulo}}{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+  <div class="d-flex justify-content-between mb-3">
+    <h2>{{ titulo_tabla }}</h2>
+    <a href="{% url 'curso:crear-curso' %}" class="btn btn-success">Crear curso</a>
+  </div>
+
+  <div class="card shadow-lg rounded-4 border-0">
+    <div class="card-body">
+      <ul class="list-group list-group-flush">
+        {% for curso in lista_curso %}
+          <li class="list-group-item d-flex justify-content-between align-items-center">
+            <span><strong>{{ curso.nombre }}</strong></span>
+            <span class="badge bg-secondary">Nro: {{ curso.numero_curso }}</span>
+            <a href="{% url 'curso:detalle-curso' curso.code %}" class="btn btn-primary btn-sm">Ver curso</a>
+          </li>
+        {% empty %}
+          <li class="list-group-item text-center text-muted">No hay cursos disponibles</li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+</div>
+{% endblock %}

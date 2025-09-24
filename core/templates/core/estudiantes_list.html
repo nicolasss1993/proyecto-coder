@@ -1,15 +1,16 @@
 {% extends "core/index.html" %}
 
-{% block title %} Lista de estudiantes {% endblock %}
-
+{% block title %}Lista de Estudiantes{% endblock %}
 
 {% block content %}
 <div class="row justify-content-center mb-4">
   <div class="col-md-8 col-lg-6 text-center">
-    <a href="{% url 'crear-estudiante-model' %}" class="btn btn-success me-2 mb-2"> Crear estudiante con Model </a>
+    <!-- Botones de acción -->
+    <a href="{% url 'crear-estudiante-model' %}" class="btn btn-success me-2 mb-2">Crear estudiante con Model</a>
   </div>
 </div>
 
+<!-- Filtro por nombre -->
 <div class="row justify-content-center mb-4">
   <div class="col-md-8 col-lg-6">
     <form method="GET" class="d-flex">
@@ -35,6 +36,7 @@
               <span class="badge bg-secondary rounded-pill">
                 Legajo: {{ estudiante.nro_legajo }}
               </span>
+              <a href="{% url 'detalle-estudiante' estudiante.pk %}" class="btn btn-primary btn-sm">Ver estudiante</a>
             </li>
           {% empty %}
             <li class="list-group-item text-center text-muted">No hay estudiantes registrados</li>
@@ -44,5 +46,4 @@
     </div>
   </div>
 </div>
-
 {% endblock %}

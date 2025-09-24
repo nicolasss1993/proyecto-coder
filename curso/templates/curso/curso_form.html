@@ -1,0 +1,23 @@
+{% extends "core/index.html" %}
+
+{% block title %}Formulario Curso{% endblock %}
+
+{% block content %}
+<div class="container mt-5">
+  <div class="card shadow-lg rounded-4 border-0">
+    <div class="card-header bg-info text-white text-center rounded-top-4">
+      <h2>{% if form.instance.pk %}Editar Curso{% else %}Crear Curso{% endif %}</h2>
+    </div>
+    <div class="card-body">
+      <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <div class="text-center">
+          <button type="submit" class="btn btn-success">Guardar</button>
+          <a href="{% url 'curso:listar-cursos' %}" class="btn btn-secondary">Cancelar</a>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}
