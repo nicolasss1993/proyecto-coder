@@ -2,7 +2,7 @@ from django.urls import path
 from .views import hola_mundo, estudiante_list, crear_estudiante, editar_estudiante, eliminar_estudiante, estudiante_detail
 
 urlpatterns = [
-    path("", hola_mundo, name="hola"),
+    path("", hola_mundo, name="hola"), # index, home
     path("listar-estudiantes/", estudiante_list, name="listar-estudiantes"),
     path("crear-estudiante-model", crear_estudiante, name="crear-estudiante-model"),
     path("editar-estudiante/<int:pk>/", editar_estudiante, name="editar-estudiante"),

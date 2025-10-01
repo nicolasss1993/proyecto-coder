@@ -2,9 +2,10 @@ from django.shortcuts import render
 from django.urls import reverse_lazy
 from curso.models import Curso
 from django.views.generic import ListView, CreateView, UpdateView, DeleteView, DetailView
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 
-class CursoListView(ListView):
+class CursoListView(LoginRequiredMixin, ListView):
     model = Curso
     template_name = "curso/curso_list.html"
     context_object_name = "lista_curso"
@@ -18,7 +19,7 @@ class CursoListView(ListView):
         context['titulo_tabla'] = "Cursoss disponibles"
         return context
 
-class CursoDetailView(DetailView):
+class CursoDetailView(LoginRequiredMixin, DetailView):
     model = Curso
     template_name = "curso/curso_detail.html"
     context_object_name = "curso"
@@ -26,14 +27,14 @@ class CursoDetailView(DetailView):
     slug_url_kwarg = "code"
 
 
-class CursoCreateView(CreateView):
+class CursoCreateView(LoginRequiredMixin, CreateView):
     model = Curso
     template_name = "curso/curso_form.html"
     fields = ["nombre"]
     success_url = reverse_lazy("curso:listar-cursos")
 
 
-class CursoDeleteView(DeleteView):
+class CursoDeleteView(LoginRequiredMixin, DeleteView):
     model = Curso
     template_name = "curso/curso_confirm_delete.html"
     slug_field = "code"
@@ -41,7 +42,10 @@ class CursoDeleteView(DeleteView):
     success_url = reverse_lazy("curso:listar-cursos")
 
 
-class CursoUpdateView(UpdateView):
+class CursoUpdateView(LoginRequiredMixin, UpdateView):
+    """
+       
+    """
     model = Curso
     template_name = "curso/curso_form.html"
     fields = ["nombre", "numero_curso"]

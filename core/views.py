@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404
+from django.contrib.auth.decorators import login_required
 # from .models import Estudiante # Relativa
 from core.models import Estudiante # Absoluta
 from core.forms import EstudianteForm, EstudianteFormManual
@@ -7,6 +8,8 @@ from core.forms import EstudianteForm, EstudianteFormManual
 def hola_mundo(request):
     return render(request, "core/index.html")
 
+def about_me(request):
+    return render(request, "core/abut_me.html")
 # def estudiante_list(request):
 #     # Lógica para obtener la lista de estudiantes desde la base de datos
 #     estudiantes = Estudiante.objects.all() # QuerySet([<Estudiante>, <Estudiante>, ...])
@@ -18,6 +21,7 @@ def hola_mundo(request):
 #     return render(request, "core/estudiantes_list.html", contexto)
 
 # POST - Crear info / GET - Pedir info / DELETE = Eliminar / PUT,UPDATE = Editar
+@login_required
 def crear_estudiante(request):
     if request.method == "POST":
         formulario = EstudianteForm(request.POST)
@@ -29,7 +33,7 @@ def crear_estudiante(request):
 
     return render(request, "core/estudiante_form.html", {"form": formulario})
 
-
+@login_required
 def estudiante_list(request):
     query = request.GET.get("q", "")
     
@@ -43,7 +47,7 @@ def estudiante_list(request):
     }
     return render(request, "core/estudiantes_list.html", contexto)
 
-
+@login_required
 def editar_estudiante(request, pk):
     estudiante = get_object_or_404(Estudiante, pk=pk)
     if request.method == "POST":
@@ -56,7 +60,7 @@ def editar_estudiante(request, pk):
 
     return render(request, "core/estudiante_form.html", {"form": form})
 
-
+@login_required
 def eliminar_estudiante(request, pk):
     estudiante = get_object_or_404(Estudiante, pk=pk)
     if request.method == "POST":
@@ -64,7 +68,7 @@ def eliminar_estudiante(request, pk):
         return redirect("listar-estudiantes")
     return redirect("listar-estudiantes")
 
-
+@login_required
 def estudiante_detail(request, pk):
     estudiante = get_object_or_404(Estudiante, pk=pk)
     contexto = {
